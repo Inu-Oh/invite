@@ -7,7 +7,8 @@
 {% block main %}
 <div class="p-5">
     <h1 class="fs-2 text-success pb-3">Add friend to event</h1>
-        <p class="fs-5"><span class="fs-4 fw-bold">{{ event.title }}</span> &nbsp;&#9679;&nbsp;
+        <p class="fs-5"><span class="fs-4 fw-bold">{{ event.title }}</span>
+             &nbsp;&#9679;&nbsp;
             {{ event.description }} &nbsp;&#9679;&nbsp; {{ event.time }}</p>
         {% if event.friend_names %}
         <p class="fs-6">{{font_awesome.render_icon("fas fa-user-group")}}
@@ -15,9 +16,12 @@
         {% endif %}
         <form action="/friend/{{ event.id }}" method="post">
             <div class="my-5 input-group input-group-lg">
-                <input autocomplete="off" autofocus class="form-control input-lg" name="username" placeholder="Friend's Username" type="text">
+                <input autocomplete="off" autofocus class="form-control input-lg" 
+                    name="username" placeholder="Friend's Username" type="text"
+                    autocomplete="off">
             </div>
-            <button class="btn btn-lg btn-primary form-control text-start" type="submit">Add Friend</button>
+            <button class="btn btn-lg btn-primary form-control text-start" 
+                type="submit">Add Friend</button>
         </form>
     </div>
 {% endblock %}

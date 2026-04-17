@@ -1,4 +1,4 @@
-todo.db
+*.db
 notes.txt
 flask_session/
 .env

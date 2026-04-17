@@ -12,10 +12,10 @@
 
         {{ font_awesome.load_js() }}
         <link href="/static/styles.css" rel="stylesheet">
-        
+
         <link rel="shortcut icon" href="/static/favicon.ico" >
 
-        <title>Doggy Todo &#9679; {% block title %}{% endblock %}</title>
+        <title>Invite &#9679; {% block title %}{% endblock %}</title>
 
     </head>
 
@@ -32,8 +32,8 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     {% if session["user_id"] %}
                         <ul class="navbar-nav me-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/add">Add a ToDo</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/">ToDo List</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/add">Send Invite</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/">Event List</a></li>
                             <li class="nav-item"><a class="nav-link" href="/history">Done List</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto mt-2 pe-3">
