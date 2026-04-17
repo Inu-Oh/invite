@@ -1,0 +1,5 @@
+todo.db
+notes.txt
+flask_session/
+.env
+.vscode

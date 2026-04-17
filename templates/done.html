@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Mark "{{ event.title }}" Done
+{% endblock %}
+
+{% block main %}
+    <div class="p-5">
+        <h1 class="fs-2 text-success pb-3">Mark ToDo Done</h1>
+        <p class="fs-5"><span class="fs-4 fw-bold">{{ event.title }}</span> &nbsp;&#9679;&nbsp;
+            {{ event.description }} &nbsp;&#9679;&nbsp; {{ event.time }}</p>
+        {% if event.friend_names %}
+        <p class="fs-6">{{font_awesome.render_icon("fas fa-user-group")}}
+            <span class="fs-4 ps-3">{{ event.friend_names }}</span></p>
+        {% endif %}
+        <form action="/done/{{ event.id }}" method="post" class="pt-3">
+            <button class="btn btn-lg btn-primary form-control text-start" type="submit">Confirm Done</button>
+        </form>
+    </div>
+{% endblock %}

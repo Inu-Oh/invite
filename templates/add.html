@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Event
+{% endblock %}
+
+{% block main %}
+    <form action="/add" method="post">
+        <div class="mb-4 input-group input-group-lg">
+            <input autocomplete="off" autofocus class="form-control input-lg" name="title" placeholder="Event" type="text">
+        </div>
+        <div class="mb-4 input-group input-group-lg">
+            <input autocomplete="off" class="form-control input-lg" name="description" placeholder="Description" type="text">
+        </div>
+        <div class="mb-4 input-group input-group-lg">
+            <input autocomplete="off" class="form-control input-lg" name="date" type="date">
+            <select autocomplete="off" class="form-control input-lg" name="hour">
+                {% for hour in hours %}
+                    {% if hour == current_hour %}
+                        <option value="{{ hour }}" selected>{{ hour }}</option>
+                    {% else %}
+                        <option value="{{ hour }}">{{ hour }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <button class="btn btn-lg btn-primary form-control text-start" type="submit">Add event</button>
+    </form>
+{% endblock %}

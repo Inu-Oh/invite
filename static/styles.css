@@ -1,0 +1,31 @@
+body {
+    background-color: lightgray !important;
+}
+
+.navbar {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.navunder {
+    height: 3.9em;
+}
+
+.brown {
+    color: #65350f;
+}
+
+#done {
+    background-color: gray !important;
+}
+
+/* footer {
+    position: fixed;
+    height: 0.5em;
+    bottom: 0;
+    width: 100%;
+} */
+

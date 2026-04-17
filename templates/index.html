@@ -1,0 +1,78 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calendar
+{% endblock %}
+
+{% block main %}
+<section class="container">
+    <h1 class="fs-2 ps-5 mb-3 text-primary">{{ user.name }}'s ToDo List</h1>
+</section>
+<section class="container">
+    <div class="row m-0 container">
+        {% for event in events %}
+        <div class="col-md-6">
+            {% if event.relevance == "overdue" %}
+                <div class="cards card p-1 m-3 row rounded-3 overflow-hidden shadow-sm h-md-250 position-relative bg-danger text-white">
+            {% elif event.relevance == "upcoming" %}
+                <div class="cards card p-1 m-3 row rounded-3 overflow-hidden shadow-sm h-md-250 position-relative bg-success text-white">
+            {% elif event.relevance == "friended" %}
+                <div class="cards card p-1 m-3 row rounded-3 overflow-hidden shadow-sm h-md-250 position-relative bg-primary text-white">
+            {% else %}
+                <div class="cards card p-1 m-3 row rounded-3 overflow-hidden shadow-sm h-md-250 position-relative bg-secondary text-white">
+            {% endif %}
+                <div class="row g-0 card-header text-start">
+                    <div class="d-inline-block fs-5 text-bold">
+                        <h2 class="fs-4 d-inline-block pe-3">{{ event.title }}</h2>
+                        {% if user.id == event.user_id %}
+                            <span class="d-inline-block">
+                                <a href="{{ url_for('friend', id=event.id) }}" class="px-2 text-warning">
+                                    {{ font_awesome.render_icon("fas fa-user-plus") }}
+                                </a>
+                            </span>
+                            <span class="d-inline-block">
+                                <a href="{{ url_for('mark_done', id=event.id) }}" class="px-2 text-warning">
+                                    {{ font_awesome.render_icon("fas fa-check") }}
+                                </a>
+                            </span>
+                            <span class="d-inline-block">
+                                <a href="{{ url_for('delete_todo', id=event.id) }}" class="px-2 text-warning">
+                                    {{ font_awesome.render_icon("fas fa-trash") }}
+                                </a>
+                            </span>
+                        {% endif %}
+                        {% if event.relevance == "overdue" %}
+                            <span class="d-inline-block ps-2 fw-bold">Overdue</span>
+                        {% elif event.relevance == "upcoming" %}
+                            <span class="d-inline-block ps-2 fw-bold">Soon</span>
+                        {% elif event.relevance == "friended" %}
+                            <span class="d-inline-block ps-2 fw-bold">Invite from {{ event.owner }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body fs-5">
+                    <div class="card-text text-start">
+                        {{ event.time }} &nbsp;&#9679;&nbsp; {{ event.description }}
+                    </div>
+                </div>
+                {% if event.friend_names %}
+                    <div class="card-footer fs-5">
+                        <span class="d-inline-block">
+                            <span class="d-inline-block pe-4">
+                                {{font_awesome.render_icon("fas fa-user-group")}}
+                            </span>
+                            <span class="d-inline-block"> {{ event.friend_names }}</span>
+                        </span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div class="fs-3 py-5 m-4 text-muted"><p>Nothing ToDo</p>
+            <p><a class="btn btn-primary fs-4 form-control text-start" href="/add">
+                Add something ToDo</a></p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

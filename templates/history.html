@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Past Events
+{% endblock %}
+
+{% block main %}
+<section class="container">
+    <h1 class="fs-2 ps-5 mb-3 text-primary">{{ user.name }}'s Been There Done That List</h1>
+</section>
+<section class="container rounded-3" id="done">
+    <div class="row m-0 container">
+        {% for event in events %}
+        <div class="col-md-6">
+            <div class="cards card p-1 m-3 row border rounded-3 overflow-hidden shadow-sm h-md-250 position-relative bg-light text-dark">
+                <div class="row g-0 card-header text-start">
+                    <div class="d-inline-block fs-5 text-bold">
+                        <h2 class="fs-4 d-inline-block pe-2">{{ event.title }}</h2>
+                        {% if user.id == event.user_id %}
+                            <span class="d-inline-block">
+                                <a href="{{ url_for('mark_undone', id=event.id) }}" class="px-3 text-danger">
+                                    {{ font_awesome.render_icon("fas fa-x") }}
+                                </a>
+                            </span>
+                            <span class="d-inline-block">
+                                <a href="{{ url_for('delete_todo', id=event.id) }}" class="px-3 text-danger">
+                                    {{ font_awesome.render_icon("fas fa-trash") }}
+                                </a>
+                            </span>
+                        {% endif %}
+                        {% if event.relevance == "friended" %}
+                            <span class="d-inline-block ps-3">Invite from {{ event.owner }}</span>
+                        {% else %}
+                            <span class="d-inline-block ps-2">Done</span>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <div class="card-body fs-6">
+                    <div class="card-text text-start">
+                        {{ event.time }} &nbsp;&#9679;&nbsp; {{ event.description }}
+                    </div>
+                </div>
+                {% if event.friend_names %}
+                    <div class="card-footer fs-5">
+                        <span class="d-inline-block">
+                            <span class="d-inline-block pe-4">
+                                {{font_awesome.render_icon("fas fa-user-group")}}
+                            </span>
+                            <span class="d-inline-block"> {{ event.friend_names }}</span>
+                        </span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% else %}
+        <div class="fs-3 py-5 text-muted">No ToDos in history</div>
+        {% endfor %}
+    </div>
+</section>
+<section class="container">
+    <h1 class="fs-4 ps-5 mt-5">ToDos will self delete after two months</h1>
+</section>
+{% endblock %}
